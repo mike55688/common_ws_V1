@@ -1,0 +1,56 @@
+<launch>
+	<param name="/use_sim_time" value="false" />
+  
+	<node pkg="car_controller" name="car_driver1" type="car_driver1" output="screen">
+	    <param name="odom_use_imu"  type="bool"  value="true"/>
+	    <param name="fork_init"  type="bool"  value="true"/>
+	    <param name="tf_publish"  type="bool"  value="true"/>
+	    <param name="max_steer_ang"  type="double"  value="30.0"/>
+	    <param name="Ka_odom"  type="double"  value="0.975"/>
+	    <param name="wheel_base"  type="double"  value="0.3"/>
+	</node>
+
+	   <!-- <node pkg="tf" type="static_transform_publisher" name="base_link_to_cam" args=" 0.40 0.0 0.60 0.0 -1.57 0.0 /base_link /camera_link 40" /> -->
+
+	   <!-- 45degree 0.785 60 1.046 -->
+       <!-- <node pkg="tf" type="static_transform_publisher" name="base_link_to_cam" args=" 0.40 0.0 0.60 1.57 -1.1 0.0 /base_link /camera_link 40" /> -->
+       <!-- <node pkg="tf" type="static_transform_publisher" name="base_link_to_camUP" args=" -0.08 0.0 0.60 -1.57 -1.1 0.0 /base_link /camera_link 40" /> -->
+	   
+	   <!-- fordward backward  -->
+	   <node pkg="tf" type="static_transform_publisher" name="base_link_to_cam" args=" 0.40 0.0 0.75 0.0 0.0 0.0 /base_link /camera_link 40" />
+       <node pkg="tf" type="static_transform_publisher" name="base_link_to_camUP" args=" 0.30 0.0 0.75 3.14 0.0 0.0 /base_link /cameraUP_link 40" />
+
+
+  	<!--include file="$(find pepperl_fuchs_r2000)/launch/r2000_2.launch"/>	
+  	<include file="$(find ira_laser_tools)/launch/laserscan_merger.launch"/>	
+  	<include file="$(find carlike_robot_nav)/launch/include/odom/gmapping_2.launch"/>
+  	<include file="$(find carlike_robot_nav)/launch/include/odom/teb_move_base.launch"/-->
+
+    	<!--node pkg="tf" type="static_transform_publisher" name="base_to_imu"  args="0 0 0 0 0 0      base_link  imu 10" />
+  	<node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args=" 0.345 0.0 0.269 0 0 0 /base_link /r2000_scan 100" /-->
+
+	<!--node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    		<rosparam command="load" file="$(find car_controller)/params/imu_odom.yaml" />
+	</node-->
+
+
+
+  	<!-- <arg name="frame_id" default="/r2000_scan"/>
+  	<arg name="scanner_ip" default="120.0.10.9"/>
+  	<arg name="scan_frequency" default="35"/>
+  	<arg name="samples_per_scan" default="1440"/>-->
+	
+
+  	<!-- R2000 Driver -->
+	<!--node pkg="pepperl_fuchs_r2000" type="r2000_node" name="r2000_node" respawn="true" output="screen">
+    		<param name="frame_id" value="$(arg frame_id)"/>
+    		<param name="scanner_ip" value="$(arg scanner_ip)"/>
+    		<param name="scan_frequency" value="$(arg scan_frequency)"/>
+    		<param name="samples_per_scan" value="$(arg samples_per_scan)"/>
+    		<remap from="/r2000_node/scan" to="/scan" />
+  	</node-->
+
+<!--include file="$(find srf_laser_odometry)/launch/srf_laser_odometry_robot.launch"/-->
+
+<!--node pkg="tf" type="static_transform_publisher" name="base_link_to_camera_link" arg="0 0 0 0 0 0  /base_link /camera_link 100 "/-->
+</launch>
